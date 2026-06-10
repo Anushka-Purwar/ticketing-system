@@ -11,6 +11,10 @@ public class Show {
     private String movieName;
     private String startTime;
 
+    @ManyToOne
+    @JoinColumn(name = "theater_id")
+    private  Theater theater;
+
     public Show(){
 
     }
