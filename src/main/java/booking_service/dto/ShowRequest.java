@@ -4,6 +4,7 @@ public class ShowRequest {
 
     private String movieName;
     private String startTime;
+    private Long theaterId;
 
     public String getMovieName() {
         return movieName;
