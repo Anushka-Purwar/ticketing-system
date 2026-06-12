@@ -39,4 +39,11 @@ public class Show {
         this.startTime = startTime;
     }
 
+    public Theater getTheater() {
+        return theater;
+    }
+
+    public void setTheater(Theater theater) {
+        this.theater = theater;
+    }
 }

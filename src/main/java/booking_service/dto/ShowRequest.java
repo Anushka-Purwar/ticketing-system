@@ -21,4 +21,12 @@ public class ShowRequest {
     public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
+
+    public Long getTheaterId() {
+        return theaterId;
+    }
+
+    public void setTheaterId(Long theaterId) {
+        this.theaterId = theaterId;
+    }
 }
