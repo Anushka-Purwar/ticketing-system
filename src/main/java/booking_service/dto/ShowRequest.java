@@ -1,9 +1,17 @@
 package booking_service.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class ShowRequest {
 
+    @NotBlank(message = "Movie name is required")
     private String movieName;
+
+    @NotBlank(message = "Start time is required")
     private String startTime;
+
+    @NotNull(message = "Theater ID is required")
     private Long theaterId;
 
     public String getMovieName() {

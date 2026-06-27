@@ -4,6 +4,7 @@ package booking_service.controller;
 import booking_service.dto.TheaterRequest;
 import booking_service.entity.Theater;
 import booking_service.service.TheaterService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class TheaterController {
     }
 
     @PostMapping
-    public Theater create(@RequestBody TheaterRequest theaterRequest){
+    public Theater create( @Valid  @RequestBody TheaterRequest theaterRequest){
         return theaterService.create(theaterRequest);
     }
 

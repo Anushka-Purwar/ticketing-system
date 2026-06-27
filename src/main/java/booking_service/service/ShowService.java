@@ -30,7 +30,7 @@ public class ShowService {
 
         Theater theater = theaterRepository.findById(request.getTheaterId())
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Theater not found"));
+                        new ResourceNotFoundException("Theater not found for this particular ID"));
 
         List<Seat> seats = new ArrayList<>();
 

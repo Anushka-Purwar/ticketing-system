@@ -13,7 +13,7 @@ public class Seat {
     private String seatNumber;
 
     @Enumerated(EnumType.STRING)
-    private SeatStatus status;
+    private SeatStatus seatStatusstatus;
 
     @ManyToOne
     @JoinColumn(name = "show_id")
@@ -36,11 +36,11 @@ public class Seat {
     }
 
     public SeatStatus getStatus() {
-        return status;
+        return seatStatusstatus;
     }
 
     public void setStatus(SeatStatus status) {
-        this.status = status;
+        this.seatStatusstatus = status;
     }
 
     public Show getShow() {

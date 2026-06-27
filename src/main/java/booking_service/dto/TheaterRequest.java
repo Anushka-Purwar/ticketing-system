@@ -1,16 +1,20 @@
 package booking_service.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class TheaterRequest {
 
-    private String name;
+    @NotBlank(message = "Theater name is required")
+    private String theaterName;
+    @NotBlank(message = "City name is required")
     private String city;
 
     public String getName() {
-        return name;
+        return theaterName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String theaterName) {
+        this.theaterName = theaterName;
     }
 
     public String getCity() {
