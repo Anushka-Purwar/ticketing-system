@@ -5,6 +5,7 @@ import booking_service.entity.Seat;
 import booking_service.entity.Show;
 import booking_service.entity.Theater;
 import booking_service.enums.SeatStatus;
+import booking_service.exceptions.DuplicateResourceException;
 import booking_service.exceptions.ResourceNotFoundException;
 import booking_service.repository.SeatRepository;
 import booking_service.repository.ShowRepository;
@@ -33,6 +34,14 @@ public class ShowService {
                         new ResourceNotFoundException("Theater not found for this particular ID"));
 
         List<Seat> seats = new ArrayList<>();
+        if (showRepository.existsByTheaterIdAndStartTime(
+                request.getTheaterId(),
+                request.getStartTime())) {
+
+            throw new DuplicateResourceException(
+                    "A show is already scheduled at this time."
+            );
+        }
 
         Show show = new Show();
         show.setMovieName(request.getMovieName());
