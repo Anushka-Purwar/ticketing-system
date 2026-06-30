@@ -12,8 +12,11 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String userName;
-    private LocalDateTime bookingDate;
+
+    @Column(nullable = false)
+    private LocalDateTime bookingTime;
 
     @ManyToOne
     private Show show;
@@ -25,11 +28,11 @@ public class Booking {
     }
 
     public LocalDateTime getBookingDate() {
-        return bookingDate;
+        return bookingTime;
     }
 
-    public void setBookingDate(LocalDateTime bookingDate) {
-        this.bookingDate = bookingDate;
+    public void setBookingDate(LocalDateTime bookingTime) {
+        this.bookingTime = bookingTime;
     }
 
     public String getUserName() {
@@ -44,9 +47,6 @@ public class Booking {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Show getShow() {
         return show;
