@@ -3,6 +3,7 @@ package booking_service.controller;
 import booking_service.dto.ShowRequest;
 import booking_service.entity.Show;
 import booking_service.service.ShowService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class ShowController {
     }
 
     @PostMapping
-    public Show createShow(@RequestBody ShowRequest request){
+    public Show createShow(@Valid @RequestBody ShowRequest request){
         return showService.createShow(request);
     }
 

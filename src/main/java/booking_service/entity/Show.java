@@ -11,6 +11,10 @@ public class Show {
     private String movieName;
     private String startTime;
 
+    @ManyToOne
+    @JoinColumn(name = "theater_id")
+    private  Theater theater;
+
     public Show(){
 
     }
@@ -35,4 +39,11 @@ public class Show {
         this.startTime = startTime;
     }
 
+    public Theater getTheater() {
+        return theater;
+    }
+
+    public void setTheater(Theater theater) {
+        this.theater = theater;
+    }
 }
