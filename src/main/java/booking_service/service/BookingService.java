@@ -11,6 +11,7 @@ import booking_service.exceptions.SeatAlreadyBookedException;
 import booking_service.repository.BookingRepository;
 import booking_service.repository.SeatRepository;
 import booking_service.repository.ShowRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -27,11 +28,13 @@ public class BookingService {
         this.bookingRepository = bookingRepository;
     }
 
+
+    @Transactional
     public Booking createBooking(BookingRequest request){
         Show show  = showRepository.findById(request.getShowId()).
                 orElseThrow(() -> new ResourceNotFoundException("Show not found"));
 
-        Seat seat = seatRepository.findById(request.getSeatId()).
+        Seat seat = seatRepository.findByIdForUpdate(request.getSeatId()).
                 orElseThrow(() -> new ResourceNotFoundException("No seat available for this show at this moment"));
 
         if(!seat.getShow().getId().equals(request.getShowId())){

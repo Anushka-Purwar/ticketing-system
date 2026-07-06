@@ -1,7 +1,4 @@
 package booking_service.dto;
-
-import booking_service.entity.Seat;
-import booking_service.entity.Show;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
