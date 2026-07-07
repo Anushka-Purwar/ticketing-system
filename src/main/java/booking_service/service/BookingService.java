@@ -1,6 +1,7 @@
 package booking_service.service;
 
 import booking_service.dto.BookingRequest;
+import booking_service.dto.SeatLockRequest;
 import booking_service.entity.Booking;
 import booking_service.entity.Seat;
 import booking_service.entity.Show;
@@ -21,11 +22,13 @@ public class BookingService {
     private final ShowRepository showRepository;
     private final SeatRepository seatRepository;
     private final BookingRepository bookingRepository;
+    private final RedisSeatLockService redisSeatLockService;
 
-    public BookingService(ShowRepository showRepository, SeatRepository seatRepository, BookingRepository bookingRepository) {
+    public BookingService(ShowRepository showRepository, SeatRepository seatRepository, BookingRepository bookingRepository, RedisSeatLockService redisSeatLockService) {
         this.showRepository = showRepository;
         this.seatRepository = seatRepository;
         this.bookingRepository = bookingRepository;
+        this.redisSeatLockService = redisSeatLockService;
     }
 
 
@@ -54,5 +57,13 @@ public class BookingService {
         seat.setStatus(SeatStatus.BOOKED);
         seatRepository.save(seat);
         return bookingRepository.save(booking);
+    }
+
+    public boolean lockSeat(SeatLockRequest request){
+        return redisSeatLockService.lockSeat(
+                request.getShowId(),
+                request.getSeatId(),
+                request.getUserName()
+        );
     }
 }
