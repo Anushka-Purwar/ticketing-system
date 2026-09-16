@@ -32,4 +32,9 @@ public class RedisSeatLockService {
         Boolean deleted = redisTemplate.delete(key);
         return Boolean.TRUE.equals(deleted);
     }
+
+    public String getLockOwner(Long showId, Long seatId){
+        String key = generateSeatLockKey(showId,seatId);
+        return redisTemplate.opsForValue().get(key);
+    }
 }

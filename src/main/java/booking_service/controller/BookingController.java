@@ -1,6 +1,7 @@
 package booking_service.controller;
 
 import booking_service.dto.BookingRequest;
+import booking_service.dto.ConfirmBookingRequest;
 import booking_service.dto.SeatLockRequest;
 import booking_service.entity.Booking;
 import booking_service.exceptions.SeatAlreadyBookedException;
@@ -18,12 +19,12 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
-    @PostMapping
-    public Booking createBooking(@Valid @RequestBody BookingRequest request) {
-        return bookingService.createBooking(request);
+    @PostMapping("/confirm")
+    public Booking confirmBooking(@RequestBody @Valid ConfirmBookingRequest request) {
+        return bookingService.confirmBooking(request);
     }
 
-    @PostMapping
+    @PostMapping("/lock")
     public ResponseEntity<String> lockSeat(@RequestBody @Valid SeatLockRequest request){
         boolean locked = bookingService.lockSeat(request);
 

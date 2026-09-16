@@ -52,6 +52,30 @@ public class GlobalExceptionHandler {
                         request
                 ));
     }
+    @ExceptionHandler(SeatAlreadyBookedException.class)
+    public ResponseEntity<ErrorResponse> handleSeatAlreadyBooked(
+            SeatAlreadyBookedException ex,
+            HttpServletRequest request) {
+
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(buildErrorResponse(
+                        HttpStatus.CONFLICT,
+                        ex.getMessage(),
+                        request
+                ));
+    }
+    @ExceptionHandler(InvalidBookingException.class)
+    public ResponseEntity<ErrorResponse> handleSeatAlreadyBooked(
+            InvalidBookingException ex,
+            HttpServletRequest request) {
+
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(buildErrorResponse(
+                        HttpStatus.CONFLICT,
+                        ex.getMessage(),
+                        request
+                ));
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidationException(
