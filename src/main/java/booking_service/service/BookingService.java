@@ -59,18 +59,20 @@ public class BookingService {
         return seat;
     }
     @Transactional
-    public Booking createBooking(BookingRequest request){
-        Seat seat = validateSeatAndShow(request.getSeatId(),request.getShowId());
-        Show show  = seat.getShow();
+    public Booking createBooking(Long showId, Long seatId, String userName) {
+
+        Seat seat = validateSeatAndShow(seatId, showId);
+        Show show = seat.getShow();
 
         Booking booking = new Booking();
-        booking.setUserName(request.getUserName());
+        booking.setUserName(userName);
         booking.setBookingDate(LocalDateTime.now());
         booking.setShow(show);
         booking.setSeat(seat);
 
         seat.setStatus(SeatStatus.BOOKED);
         seatRepository.save(seat);
+
         return bookingRepository.save(booking);
     }
     @Transactional
@@ -89,12 +91,11 @@ public class BookingService {
             throw new InvalidBookingException("Seat is locked by another user");
         }
 
-        BookingRequest bookingRequest = new BookingRequest();
-        bookingRequest.setShowId(request.getShowId());
-        bookingRequest.setSeatId(request.getSeatId());
-        bookingRequest.setUserName(request.getUserName());
-
-        Booking booking = createBooking(bookingRequest);
+        Booking booking = createBooking(
+                request.getShowId(),
+                request.getSeatId(),
+                request.getUserName()
+        );
 
         redisSeatLockService.unlockSeat(
                 request.getShowId(),
